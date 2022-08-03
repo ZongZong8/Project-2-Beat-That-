@@ -85,6 +85,25 @@ var getPlayerScore = function (playerInput) {
   return outputMessage2;
 };
 
+var comparePlayersScores = function () {
+  var compareMessage =
+    "Player 1 score: " +
+    allPlayerScore[0] +
+    "<br> Player 2 score: " +
+    allPlayerScore[1];
+  if (allPlayerScore[0] < allPlayerScore[1]) {
+    compareMessage = compareMessage + "<br><br>Player 2 wins!";
+  }
+  if (allPlayerScore[0] > allPlayerScore[1]) {
+    compareMessage = compareMessage + ".<br><br>Player 1 wins!";
+  }
+  if (allPlayerScore[0] == allPlayerScore[1]) {
+    compareMessage = compareMessage + ".<br><br>It is a tie!";
+  }
+
+  return compareMessage;
+};
+
 var main = function (input) {
   var myOutputValue = "";
   if (gameState == GAME_STATE_DICE_ROLL) {
@@ -109,5 +128,8 @@ var main = function (input) {
     gameState = GAME_STATE_COMPARE_SCORES;
     return myOutputValue + "<br></br>Press submit to compare scores!";
   }
-  return myOutputValue;
+
+  if (gameState == GAME_STATE_COMPARE_SCORES) {
+    return comparePlayersScores();
+  }
 };
