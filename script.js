@@ -92,16 +92,28 @@ var comparePlayersScores = function () {
     "<br> Player 2 score: " +
     allPlayerScore[1];
   if (allPlayerScore[0] < allPlayerScore[1]) {
-    compareMessage = compareMessage + "<br><br>Player 2 wins!";
+    compareMessage =
+      compareMessage +
+      "<br><br>Player 2 wins!<br><br>Press Submit to reset the game.";
   }
   if (allPlayerScore[0] > allPlayerScore[1]) {
-    compareMessage = compareMessage + ".<br><br>Player 1 wins!";
+    compareMessage =
+      compareMessage +
+      ".<br><br>Player 1 wins!<br><br>Press Submit to reset the game.";
   }
   if (allPlayerScore[0] == allPlayerScore[1]) {
-    compareMessage = compareMessage + ".<br><br>It is a tie!";
+    compareMessage =
+      compareMessage +
+      ".<br><br>It is a tie!<br><br>Press Submit to reset the game.";
   }
 
   return compareMessage;
+};
+
+var resetGame = function () {
+  currentPlayer = 1;
+  gameState = GAME_STATE_DICE_ROLL;
+  allPlayerScore = [];
 };
 
 var main = function (input) {
@@ -130,6 +142,8 @@ var main = function (input) {
   }
 
   if (gameState == GAME_STATE_COMPARE_SCORES) {
-    return comparePlayersScores();
+    myOutputValue = comparePlayersScores();
+    resetGame();
+    return myOutputValue;
   }
 };
